@@ -1,0 +1,78 @@
+<div class="main-container">
+<h1><%= @post.title %></h1>
+<p><%= @post.body %></p>
+<p>Created by: <%= @post.user&.full_name || 'DELETED'  %></p>
+<br />
+<small>
+Posted <%= time_ago_in_words(@post.created_at) %> ago
+</small>
+
+<br />
+<p></p>
+
+<% if can? :crud, @post %>
+<div class="btn btn-outline-primary">
+<%= link_to 'Edit',  edit_post_path(@post)%>
+</div>
+
+<div class="btn btn-outline-primary">
+    <%= link_to 'Delete', post_path(@post), method: :delete%>
+</div>
+
+<% end %>
+
+<br />
+
+<hr />
+
+<h2>Comments</h2>
+
+<%= @comment.errors.full_messages.join(', ') %>
+<%= form_for [@post,@comment] do
+    |f| %>
+    
+
+<div class="form-group">
+
+    <%= f.text_area(
+        :body,
+        cols:50,
+        rows:5,
+        placeholder:"Whatchu thinkin bout, Willis?",
+        class: "form-control"
+    ) %>
+
+</div>
+
+    <%= f.submit  class: "btn btn-outline-primary"  %>
+
+    <% end %>
+
+
+<hr />
+
+<ul class="review-list">
+    <% @comments.each do |ans| %>
+    <li>
+        <p>
+        <%= ans.body %>
+        <br />
+         <small>
+          Commented by: <%= @post.user&.full_name   %> <%= time_ago_in_words(ans.created_at) %> ago
+        </small>
+        <br />
+         <% if can? :crud, ans %>
+        <small>
+        <%= link_to  'Delete', 
+            post_comment_path(@post, ans), 
+            method: :delete, 
+            data: { confirm: 'You sure? aint no goin back.' } %>
+        <% end %>
+        </small>
+        
+        <hr />
+        </p>
+    </li>
+    <% end %>
+
+</ul>

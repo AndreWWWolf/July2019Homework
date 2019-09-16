@@ -1,0 +1,65 @@
+ @import "bootstrap";
+ @import "main";
+
+ 
+.post-container {
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 0 20px;
+
+    .post {
+        grid-column: span 1;
+        border-radius: 15px;
+        border: 2px solid rgb(0, 179, 255);
+        padding: 20px; 
+       
+    }
+}
+ 
+@media only screen and (max-width: 950px) {
+    .post-container {
+        width: 100vw;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 20px;
+        padding: 0 20px;
+        
+        .post {
+            grid-column: span 1;
+            border-radius: 15px;
+            border: 2px solid rgb(0, 179, 255);
+            padding: 20px; 
+            
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .post-container {
+        width: 100vw;
+        display: grid;
+        grid-template-columns:  1fr;
+        grid-gap: 20px;
+        padding: 0 20px;
+                       
+            .post {
+            grid-column: span 1;
+            border-radius: 15px;
+            border: 2px solid rgb(0, 179, 255);
+            padding: 20px; 
+                              
+            }
+        }
+}
+
+.main-container{
+    margin:1em;
+}
+
+
+.space {
+
+    padding-inline-start: 40px;
+}
